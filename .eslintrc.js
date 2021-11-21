@@ -2,15 +2,16 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended',
-    'prettier'
-  ],
-  plugins: [
+    'prettier',
   ],
   // add your custom rules here
-  rules: {}
-}
+  rules: {
+    // NOTE: console系はconsole.errorだけwarning出ないようにする
+    'no-console': [1, { allow: ['error'] }],
+  },
+};
