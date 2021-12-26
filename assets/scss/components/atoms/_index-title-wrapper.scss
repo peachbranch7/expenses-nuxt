@@ -1,0 +1,27 @@
+.index-title-wrapper {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+
+  > .expense {
+    padding: 5px 50px;
+    border: 1px solid $blue-hidden-sea-glass;
+    border-radius: 6px;
+  }
+
+  > .expense.-active {
+    background-color: $blue-hidden-sea-glass;
+  }
+
+  > .income {
+    padding: 5px 50px;
+    border: 1px solid $red-coral;
+    border-radius: 6px;
+  }
+
+  > .income.-active {
+    background-color: $red-coral;
+  }
+}
