@@ -1,0 +1,39 @@
+.form-container {
+  > .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 1.8rem;
+  }
+
+  > .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 100px;
+  }
+
+  > .container > .input {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid $grey;
+    border-radius: 6px;
+  }
+
+  > .container > .radiobutton {
+    margin-bottom: 30px;
+  }
+
+  > .container > .button {
+    display: flex;
+    padding: 10px 20px;
+    margin: 30px auto 0;
+    color: $blue-hidden-sea-glass;
+    border: 1px solid $grey-fortress-grey;
+    border-radius: 6px;
+  }
+}
