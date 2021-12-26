@@ -1,0 +1,47 @@
+.expense-card {
+  width: 30%;
+  border: 1px solid $grey-snow-flake;
+  border-radius: 6px;
+  box-shadow: 0 5px 5px 5px $black-shadow;
+
+  > .date {
+    padding: 10px;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  > .date.-expense {
+    background-color: $blue-hidden-sea-glass;
+    border-radius: 6px 6px 0 0;
+  }
+
+  > .date.-income {
+    background-color: $red-coral;
+    border-radius: 6px 6px 0 0;
+  }
+
+  > .category {
+    padding: 10px 10px 0;
+    font-size: 2rem;
+    color: $grey;
+    text-align: center;
+  }
+
+  > .box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 10px 20px;
+  }
+
+  > .box > .img {
+    width: 70px;
+    height: 50px;
+  }
+
+  > .box > .price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+}

@@ -1,0 +1,15 @@
+.input-form-container {
+  margin-bottom: 30px;
+
+  > .input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid $blue-hidden-sea-glass;
+    border-radius: 6px;
+  }
+
+  > .caution {
+    font-weight: bold;
+    color: $red-dragon-fruits;
+  }
+}
