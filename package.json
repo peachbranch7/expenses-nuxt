@@ -26,7 +26,8 @@
     "nuxt": "^2.15.7",
     "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
-    "vee-validate": "3.x"
+    "vee-validate": "3.x",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

@@ -32,8 +32,7 @@
           tag="div"
           class="container"
         >
-          <h2>日付</h2>
-          <input type="date" class="input" />
+          <InputDateForm label="日付" />
           <InputForm
             label="金額"
             rules="required|number"
@@ -54,7 +53,6 @@
           />
           <InputForm
             label="メモ"
-            rules="required"
             placeholder="例）母とディナー"
             :set-value="memoValue"
             :is-income="expenseType === 1"
@@ -82,6 +80,7 @@ import InputForm from '~/components/atoms/InputForm.vue';
 import AppButton from '~/components/atoms/AppButton.vue';
 import { ExpenseType } from '~/utils/enum';
 import { CardListItem, CategoryItems } from '~/types/front-type';
+import InputDateForm from '~/components/atoms/InputDateForm.vue';
 
 export default defineComponent({
   components: {
@@ -90,6 +89,7 @@ export default defineComponent({
     InputForm,
     AppButton,
     ValidationObserver,
+    InputDateForm,
   },
   setup() {
     const priceValue = ref<string>('');
@@ -169,6 +169,13 @@ export default defineComponent({
       },
       {
         id: 2,
+        date: '2021-06-20',
+        category: '日用品',
+        img: require('~/assets/images/icon/money.svg'),
+        price: '12,000',
+      },
+      {
+        id: 3,
         date: '2021-06-20',
         category: '日用品',
         img: require('~/assets/images/icon/money.svg'),
