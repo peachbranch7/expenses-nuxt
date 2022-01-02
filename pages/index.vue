@@ -5,14 +5,14 @@
         <ul class="index-title-wrapper">
           <li
             class="expense"
-            :class="{ '-active': isActive === ExpenseType.Expense }"
+            :class="{ '-active': expenseType === ExpenseType.Expense }"
             @click="changeTab(ExpenseType.Expense)"
           >
             支出
           </li>
           <li
             class="income"
-            :class="{ '-active': isActive === ExpenseType.Income }"
+            :class="{ '-active': expenseType === ExpenseType.Income }"
             @click="changeTab(ExpenseType.Income)"
           >
             収入
@@ -21,7 +21,7 @@
         <ExpenseCard
           :expense-list-item="expenseListItem"
           :income-list-item="incomeListItem"
-          :is-active="isActive"
+          :is-active="expenseType"
         />
       </div>
       <div class="form-container">
@@ -39,13 +39,16 @@
             rules="required|number"
             placeholder="¥ 金額を入力してください"
             :set-value="priceValue"
+            :is-income="expenseType === 1"
             input-name="price"
             @input="(v) => (priceValue = v)"
           />
           <AppRadioButton
             label="カテゴリー"
-            :options="options"
+            :options="expenseType === 0 ? expenseOptions : incomeOptions"
             :selected-option="selectedOption"
+            :expense-type="expenseType"
+            :is-income="expenseType === 1"
             class="radiobutton"
             @change="(v) => getSelectedOption(v)"
           />
@@ -54,12 +57,16 @@
             rules="required"
             placeholder="例）母とディナー"
             :set-value="memoValue"
+            :is-income="expenseType === 1"
             input-name="memo"
             @input="(v) => (memoValue = v)"
           />
-          <button class="button" :disabled="invalid" @click="save()">
-            確認へ
-          </button>
+          <AppButton
+            :is-income="expenseType === ExpenseType.Income"
+            :disabled="invalid"
+            @click="save()"
+            >確認へ</AppButton
+          >
         </ValidationObserver>
       </div>
     </div>
@@ -72,6 +79,7 @@ import { ValidationObserver } from 'vee-validate';
 import AppRadioButton from '~/components/atoms/AppRadioButton.vue';
 import ExpenseCard from '~/components/atoms/ExpenseCard.vue';
 import InputForm from '~/components/atoms/InputForm.vue';
+import AppButton from '~/components/atoms/AppButton.vue';
 import { ExpenseType } from '~/utils/enum';
 import { CardListItem, CategoryItems } from '~/types/front-type';
 
@@ -80,6 +88,7 @@ export default defineComponent({
     ExpenseCard,
     AppRadioButton,
     InputForm,
+    AppButton,
     ValidationObserver,
   },
   setup() {
@@ -88,7 +97,7 @@ export default defineComponent({
     const selectedOption = ref<number>(1);
     const isActiveModal = ref<boolean>(false);
 
-    const options: CategoryItems = [
+    const expenseOptions: CategoryItems = [
       {
         id: 1,
         category: '食費',
@@ -120,6 +129,36 @@ export default defineComponent({
         image: require('~/assets/images/icon/social-expense.svg'),
       },
     ];
+
+    const incomeOptions: CategoryItems = [
+      {
+        id: 1,
+        category: '給料',
+        image: require('~/assets/images/icon/meal.svg'),
+      },
+      {
+        id: 2,
+        category: '副業',
+        image: require('~/assets/images/icon/clothing.svg'),
+      },
+      {
+        id: 3,
+        category: '宝くじ',
+        image: require('~/assets/images/icon/daily-expense.svg'),
+      },
+      {
+        id: 4,
+        category: '臨時収入',
+        image: require('~/assets/images/icon/beauty.svg'),
+      },
+      {
+        id: 5,
+        category: 'お小遣い',
+        image: require('~/assets/images/icon/phone.svg'),
+      },
+    ];
+
+    // TODO: firebaseとの繋ぎ込み時に削除
     const expenseListItem: CardListItem = [
       {
         id: 1,
@@ -144,6 +183,7 @@ export default defineComponent({
       },
     ];
 
+    // TODO: firebaseとの繋ぎ込み時に削除
     const incomeListItem: CardListItem = [
       {
         id: 1,
@@ -168,20 +208,29 @@ export default defineComponent({
       },
     ];
 
-    const isActive = ref<ExpenseType.Expense | ExpenseType.Income>(
+    const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
       ExpenseType.Expense,
     );
 
     const changeTab = (val: ExpenseType.Expense | ExpenseType.Income) => {
-      return (isActive.value = val);
+      return (expenseType.value = val);
     };
 
     const getSelectedOption = (id: number) => {
       if (!selectedOption.value) return;
-      selectedOption.value = options.find((option) => option.id === id)?.id!;
+      if (expenseType.value === 0) {
+        selectedOption.value = expenseOptions.find(
+          (option) => option.id === id,
+        )?.id!;
+      } else {
+        selectedOption.value = incomeOptions.find(
+          (option) => option.id === id,
+        )?.id!;
+      }
     };
 
     const save = () => {
+      console.log('モーダル');
       isActiveModal.value = true;
     };
 
@@ -191,8 +240,9 @@ export default defineComponent({
       expenseListItem,
       incomeListItem,
       changeTab,
-      isActive,
-      options,
+      expenseType,
+      expenseOptions,
+      incomeOptions,
       getSelectedOption,
       selectedOption,
       ExpenseType,

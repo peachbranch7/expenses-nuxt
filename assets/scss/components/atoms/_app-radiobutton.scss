@@ -1,6 +1,6 @@
 .app-radiobutton {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   width: 100%;
   margin-top: 8px;
@@ -22,6 +22,24 @@
 
   > .radiobutton.-checked {
     background-color: $blue-hidden-sea-glass;
+  }
+
+  > .radiobutton.-income {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    text-align: center;
+    border: 2px solid $red-coral;
+    border-radius: 6px;
+  }
+
+  > .radiobutton.-income.-checked {
+    background-color: $red-coral;
   }
 
   > .radiobutton > .icon {

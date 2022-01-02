@@ -1,0 +1,22 @@
+.app-button {
+  display: flex;
+  padding: 10px 20px;
+  margin: 30px auto 0;
+  color: $white;
+  background-color: $blue-hidden-sea-glass;
+  border: 2px solid $blue-hidden-sea-glass;
+  border-radius: 6px;
+
+  &.-income {
+    color: $white;
+    background-color: $red-coral;
+    border: 2px solid $red-coral;
+  }
+
+  &.-disabled {
+    color: $white;
+    pointer-events: none;
+    background-color: $grey-fortress-grey;
+    border: 2px solid $grey-fortress-grey;
+  }
+}

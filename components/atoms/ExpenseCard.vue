@@ -40,9 +40,9 @@ export default defineComponent({
     },
 
     isActive: {
-      type: String as PropType<ExpenseType.Expense | ExpenseType.Income>,
+      type: Number as PropType<ExpenseType.Expense | ExpenseType.Income>,
       required: false,
-      default: 'expense',
+      default: ExpenseType.Expense,
     },
   },
   setup() {

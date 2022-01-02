@@ -6,7 +6,10 @@
         v-for="option in options"
         :key="option.id + option.category"
         class="radiobutton"
-        :class="{ '-checked': option.id === selectedOption }"
+        :class="{
+          '-checked': option.id === selectedOption,
+          '-income': isIncome,
+        }"
         :for="option.id"
       >
         <input
@@ -43,6 +46,10 @@ export default defineComponent({
     selectedOption: {
       type: Number,
       default: 1,
+    },
+    isIncome: {
+      type: Boolean,
+      default: false,
     },
   },
   setup() {},

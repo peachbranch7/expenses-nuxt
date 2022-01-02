@@ -6,6 +6,7 @@
         v-model="inputValue"
         type="text"
         class="input"
+        :class="{ '-income': isIncome }"
         name="inputName"
         :placeholder="placeholder"
       />
@@ -42,6 +43,10 @@ export default defineComponent({
     inputName: {
       type: String,
       default: '',
+    },
+    isIncome: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {
