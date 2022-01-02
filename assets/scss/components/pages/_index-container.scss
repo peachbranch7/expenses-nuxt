@@ -4,16 +4,26 @@
 
   > .container {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 55% 45%;
+
+    @include tab {
+      display: block;
+    }
   }
 
   > .container > .wrapper > .content {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
     border: 2px solid $grey-fortress-grey;
     border-radius: 6px;
+
+    @include pc {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   > .container > .block > .title.-active {
