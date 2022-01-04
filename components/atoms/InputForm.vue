@@ -26,7 +26,7 @@ export default defineComponent({
   props: {
     rules: {
       type: String,
-      required: true,
+      default: '',
     },
     label: {
       type: String,

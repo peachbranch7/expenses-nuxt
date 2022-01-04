@@ -19,7 +19,7 @@
           </li>
         </ul>
         <ExpenseCard
-          :expense-list-item="expenseListItem"
+          :expense-list-item="expenseArray"
           :income-list-item="incomeListItem"
           :is-active="expenseType"
         />
@@ -32,7 +32,11 @@
           tag="div"
           class="container"
         >
-          <InputDateForm label="日付" />
+          <InputDateForm
+            label="日付"
+            :set-value="dateValue"
+            @input="(v) => (dateValue = v)"
+          />
           <InputForm
             label="金額"
             rules="required|number"
@@ -66,6 +70,7 @@
             >確認へ</AppButton
           >
         </ValidationObserver>
+        <button @click="add()">テスト</button>
       </div>
     </div>
   </section>
@@ -74,6 +79,12 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api';
 import { ValidationObserver } from 'vee-validate';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  QueryDocumentSnapshot,
+} from 'firebase/firestore';
 import AppRadioButton from '~/components/atoms/AppRadioButton.vue';
 import ExpenseCard from '~/components/atoms/ExpenseCard.vue';
 import InputForm from '~/components/atoms/InputForm.vue';
@@ -81,6 +92,8 @@ import AppButton from '~/components/atoms/AppButton.vue';
 import { ExpenseType } from '~/utils/enum';
 import { CardListItem, CategoryItems } from '~/types/front-type';
 import InputDateForm from '~/components/atoms/InputDateForm.vue';
+import { getCategoryName } from '~/utils/helpers';
+import db from '~/plugins/firebase';
 
 export default defineComponent({
   components: {
@@ -92,9 +105,41 @@ export default defineComponent({
     InputDateForm,
   },
   setup() {
+    const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
+      ExpenseType.Expense,
+    );
     const priceValue = ref<string>('');
     const memoValue = ref<string>('');
+    const dateValue = ref<string>('');
+    const expenseArray = ref<any>([]);
+    const incomeArray = ref<any>([]);
     const selectedOption = ref<number>(1);
+    const expenseRef = collection(db, 'expense');
+    const incomeRef = collection(db, 'income');
+
+    const add = async () => {
+      await addDoc(expenseRef, {
+        date: dateValue.value,
+        price: priceValue.value,
+        memo: memoValue.value,
+        category: getCategoryName(selectedOption.value),
+      });
+    };
+
+    getDocs(expenseRef).then((querySnapshot) => {
+      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+        expenseArray.value.push(doc.data());
+      });
+      return expenseArray;
+    });
+
+    getDocs(incomeRef).then((querySnapshot) => {
+      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+        incomeArray.value.push(doc.data());
+      });
+      return incomeArray;
+    });
+
     const isActiveModal = ref<boolean>(false);
 
     const expenseOptions: CategoryItems = [
@@ -159,38 +204,6 @@ export default defineComponent({
     ];
 
     // TODO: firebaseとの繋ぎ込み時に削除
-    const expenseListItem: CardListItem = [
-      {
-        id: 1,
-        date: '2021-06-20',
-        category: '日用品',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '12,000',
-      },
-      {
-        id: 2,
-        date: '2021-06-20',
-        category: '日用品',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '12,000',
-      },
-      {
-        id: 3,
-        date: '2021-06-20',
-        category: '日用品',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '12,000',
-      },
-      {
-        id: 3,
-        date: '2021-06-20',
-        category: '日用品',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '12,000',
-      },
-    ];
-
-    // TODO: firebaseとの繋ぎ込み時に削除
     const incomeListItem: CardListItem = [
       {
         id: 1,
@@ -215,10 +228,6 @@ export default defineComponent({
       },
     ];
 
-    const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
-      ExpenseType.Expense,
-    );
-
     const changeTab = (val: ExpenseType.Expense | ExpenseType.Income) => {
       return (expenseType.value = val);
     };
@@ -237,14 +246,13 @@ export default defineComponent({
     };
 
     const save = () => {
-      console.log('モーダル');
       isActiveModal.value = true;
     };
 
     return {
       priceValue,
       memoValue,
-      expenseListItem,
+      dateValue,
       incomeListItem,
       changeTab,
       expenseType,
@@ -253,7 +261,9 @@ export default defineComponent({
       getSelectedOption,
       selectedOption,
       ExpenseType,
+      expenseArray,
       save,
+      add,
     };
   },
 });
