@@ -90,7 +90,7 @@ import ExpenseCard from '~/components/atoms/ExpenseCard.vue';
 import InputForm from '~/components/atoms/InputForm.vue';
 import AppButton from '~/components/atoms/AppButton.vue';
 import { ExpenseType } from '~/utils/enum';
-import { CardListItem, CategoryItems } from '~/types/front-type';
+import { CategoryItems } from '~/types/front-type';
 import InputDateForm from '~/components/atoms/InputDateForm.vue';
 import { getCategoryName } from '~/utils/helpers';
 import db from '~/plugins/firebase';
@@ -116,6 +116,7 @@ export default defineComponent({
     const selectedOption = ref<number>(1);
     const expenseRef = collection(db, 'expense');
     const incomeRef = collection(db, 'income');
+    const isActiveModal = ref<boolean>(false);
 
     const add = async () => {
       await addDoc(expenseRef, {
@@ -140,7 +141,26 @@ export default defineComponent({
       return incomeArray;
     });
 
-    const isActiveModal = ref<boolean>(false);
+    const changeTab = (val: ExpenseType.Expense | ExpenseType.Income) => {
+      return (expenseType.value = val);
+    };
+
+    const getSelectedOption = (id: number) => {
+      if (!selectedOption.value) return;
+      if (expenseType.value === 0) {
+        selectedOption.value = expenseOptions.find(
+          (option) => option.id === id,
+        )?.id!;
+      } else {
+        selectedOption.value = incomeOptions.find(
+          (option) => option.id === id,
+        )?.id!;
+      }
+    };
+
+    const save = () => {
+      isActiveModal.value = true;
+    };
 
     const expenseOptions: CategoryItems = [
       {
@@ -203,57 +223,10 @@ export default defineComponent({
       },
     ];
 
-    // TODO: firebaseとの繋ぎ込み時に削除
-    const incomeListItem: CardListItem = [
-      {
-        id: 1,
-        date: '2021-06-25',
-        category: '給料',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '250,000',
-      },
-      {
-        id: 2,
-        date: '2021-06-24',
-        category: '株',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '900,000',
-      },
-      {
-        id: 3,
-        date: '2021-06-20',
-        category: 'メルカリ',
-        img: require('~/assets/images/icon/money.svg'),
-        price: '14,000',
-      },
-    ];
-
-    const changeTab = (val: ExpenseType.Expense | ExpenseType.Income) => {
-      return (expenseType.value = val);
-    };
-
-    const getSelectedOption = (id: number) => {
-      if (!selectedOption.value) return;
-      if (expenseType.value === 0) {
-        selectedOption.value = expenseOptions.find(
-          (option) => option.id === id,
-        )?.id!;
-      } else {
-        selectedOption.value = incomeOptions.find(
-          (option) => option.id === id,
-        )?.id!;
-      }
-    };
-
-    const save = () => {
-      isActiveModal.value = true;
-    };
-
     return {
       priceValue,
       memoValue,
       dateValue,
-      incomeListItem,
       changeTab,
       expenseType,
       expenseOptions,

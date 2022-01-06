@@ -41,6 +41,16 @@ export const getCategoryImage = (category: string): string => {
       return require('~/assets/images/icon/phone.svg');
     case CategoryType.Social:
       return require('~/assets/images/icon/social-expense.svg');
+    case CategoryType.Salary:
+      return require('~/assets/images/icon/salary.svg');
+    case CategoryType.SideBusiness:
+      return require('~/assets/images/icon/side-business.svg');
+    case CategoryType.Lottery:
+      return require('~/assets/images/icon/lottery.svg');
+    case CategoryType.IncidentalIncome:
+      return require('~/assets/images/icon/incidental-income.svg');
+    case CategoryType.PocketMoney:
+      return require('~/assets/images/icon/pocket-money.svg');
     default:
       return '';
   }
