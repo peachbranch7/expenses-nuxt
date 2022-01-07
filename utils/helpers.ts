@@ -1,26 +1,46 @@
 import dayjs from 'dayjs';
-import { CategoryType } from '~/utils/enum';
+import { CategoryType, ExpenseType } from '~/utils/enum';
 
 /**
  * selectedOptionをcategory名に変換する処理
  */
 
-export const getCategoryName = (selectedOption: number): string => {
-  switch (selectedOption) {
-    case 1:
-      return '食費';
-    case 2:
-      return '衣類';
-    case 3:
-      return '日用品';
-    case 4:
-      return '美容代';
-    case 5:
-      return '通信費';
-    case 6:
-      return '交際費';
-    default:
-      return '';
+export const getCategoryName = (
+  selectedOption: number,
+  expenseType: number,
+): string => {
+  if (expenseType === ExpenseType.Expense) {
+    switch (selectedOption) {
+      case 1:
+        return '食費';
+      case 2:
+        return '衣類';
+      case 3:
+        return '日用品';
+      case 4:
+        return '美容代';
+      case 5:
+        return '通信費';
+      case 6:
+        return '交際費';
+      default:
+        return '';
+    }
+  } else {
+    switch (selectedOption) {
+      case 1:
+        return '給料';
+      case 2:
+        return '副業';
+      case 3:
+        return '宝くじ';
+      case 4:
+        return '臨時収入';
+      case 5:
+        return 'お小遣い';
+      default:
+        return '';
+    }
   }
 };
 

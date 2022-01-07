@@ -20,7 +20,7 @@
         </ul>
         <ExpenseCard
           :expense-list-item="expenseArray"
-          :income-list-item="incomeListItem"
+          :income-list-item="incomeArray"
           :is-active="expenseType"
         />
       </div>
@@ -35,6 +35,7 @@
           <InputDateForm
             label="日付"
             :set-value="dateValue"
+            :is-income="expenseType === 1"
             @input="(v) => (dateValue = v)"
           />
           <InputForm
@@ -118,12 +119,12 @@ export default defineComponent({
     const incomeRef = collection(db, 'income');
     const isActiveModal = ref<boolean>(false);
 
-    const add = async () => {
-      await addDoc(expenseRef, {
+    const add = async (): Promise<void> => {
+      await addDoc(expenseType.value === 0 ? expenseRef : incomeRef, {
         date: dateValue.value,
         price: priceValue.value,
         memo: memoValue.value,
-        category: getCategoryName(selectedOption.value),
+        category: getCategoryName(selectedOption.value, expenseType.value),
       });
     };
 
@@ -141,11 +142,13 @@ export default defineComponent({
       return incomeArray;
     });
 
-    const changeTab = (val: ExpenseType.Expense | ExpenseType.Income) => {
+    const changeTab = (
+      val: ExpenseType.Expense | ExpenseType.Income,
+    ): ExpenseType => {
       return (expenseType.value = val);
     };
 
-    const getSelectedOption = (id: number) => {
+    const getSelectedOption = (id: number): void => {
       if (!selectedOption.value) return;
       if (expenseType.value === 0) {
         selectedOption.value = expenseOptions.find(
@@ -235,6 +238,7 @@ export default defineComponent({
       selectedOption,
       ExpenseType,
       expenseArray,
+      incomeArray,
       save,
       add,
     };

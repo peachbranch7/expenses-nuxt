@@ -6,6 +6,7 @@
       class="input-date-form"
       :format="datePicker.format"
       :value="datePicker.date"
+      :class="{ '-income': isIncome }"
     />
   </section>
 </template>
@@ -25,6 +26,10 @@ export default defineComponent({
     setValue: {
       type: String,
       default: '',
+    },
+    isIncome: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(_, { emit }) {
