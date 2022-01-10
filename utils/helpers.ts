@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { CategoryType, ExpenseType } from '~/utils/enum';
 
 /**
@@ -80,6 +80,6 @@ export const getCategoryImage = (category: string): string => {
  *  timestamp型のdateのformatを変換する処理
  */
 
-export const convertDateFormat = (date: any): string => {
+export const convertDateFormat = (date: Dayjs): string => {
   return dayjs(date.toDate()).format(`YYYY年M月DD日`);
 };
