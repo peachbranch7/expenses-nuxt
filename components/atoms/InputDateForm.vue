@@ -1,31 +1,41 @@
 <template>
-  <section>
-    <h2>{{ label }}</h2>
-    <Datepicker
-      v-model="inputValue"
-      class="input-date-form"
-      :format="datePicker.format"
-      :value="datePicker.date"
-      :class="{ '-income': isIncome }"
-    />
-  </section>
+  <ValidationProvider v-slot="{ errors }" :rules="rules">
+    <section>
+      <h2>{{ label }}</h2>
+      <Datepicker
+        v-model="inputValue"
+        class="input-date-form"
+        :format="datePicker.format"
+        :value="datePicker.date"
+        :class="{ '-income': isIncome }"
+      />
+      <P v-if="errors" class="caution">{{ errors[0] }}</P>
+    </section>
+  </ValidationProvider>
 </template>
 <script lang="ts">
 import { defineComponent, computed } from '@nuxtjs/composition-api';
+import { Dayjs } from 'dayjs';
+import { ValidationProvider } from 'vee-validate';
 import Datepicker from 'vuejs-datepicker';
 
 export default defineComponent({
   components: {
     Datepicker,
+    ValidationProvider,
   },
   props: {
+    rules: {
+      type: String,
+      default: '',
+    },
     label: {
       type: String,
       default: '',
     },
     setValue: {
-      type: String,
-      default: '',
+      type: Dayjs,
+      required: true,
     },
     isIncome: {
       type: Boolean,
