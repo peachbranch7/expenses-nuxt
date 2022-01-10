@@ -1,6 +1,8 @@
+import { Dayjs } from 'dayjs';
+
 export type CardListItem = {
   id: number;
-  date: string;
+  date: Dayjs;
   category: string;
   img: string;
   price: string;
@@ -11,3 +13,10 @@ export type CategoryItems = {
   category: string;
   image: string;
 }[];
+
+export type FormValuesType = {
+  date: string;
+  category: string;
+  price: string;
+  memo: string;
+};

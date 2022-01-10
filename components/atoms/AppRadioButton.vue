@@ -21,7 +21,7 @@
           value="option.category"
           @change="$emit('change', option.id)"
         />
-        <img :src="option.image" class="icon" />
+        <img :src="getCategoryImage(option.category)" class="icon" />
         <p class="label">
           {{ option.category }}
         </p>
@@ -32,6 +32,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
 import { CategoryItems } from '~/types/front-type';
+import { getCategoryImage } from '~/utils/helpers';
 
 export default defineComponent({
   props: {
@@ -52,6 +53,10 @@ export default defineComponent({
       default: false,
     },
   },
-  setup() {},
+  setup() {
+    return {
+      getCategoryImage,
+    };
+  },
 });
 </script>
