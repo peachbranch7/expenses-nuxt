@@ -15,12 +15,13 @@
     height: 100%;
     padding: 10px 0;
     text-align: center;
-    border: 2px solid $blue-hidden-sea-glass;
+    border: 2px solid $purple;
     border-radius: 6px;
   }
 
   > .radiobutton.-checked {
-    background-color: $blue-hidden-sea-glass;
+    color: $white;
+    background-color: $purple;
   }
 
   > .radiobutton.-income {
@@ -33,12 +34,12 @@
     height: 100%;
     padding: 10px 0;
     text-align: center;
-    border: 2px solid $red-coral;
+    border: 2px solid $purple;
     border-radius: 6px;
   }
 
   > .radiobutton.-income.-checked {
-    background-color: $red-coral;
+    background-color: $purple;
   }
 
   > .radiobutton > .icon {
