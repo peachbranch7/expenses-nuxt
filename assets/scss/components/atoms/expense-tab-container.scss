@@ -1,0 +1,46 @@
+.expense-tab-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  // padding: 10px 0;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border: 2px solid $purple;
+  border-radius: 6px;
+
+  @include tab {
+    gap: 40px;
+  }
+
+  > .expense {
+    width: 50%;
+    padding: 15px 50px;
+    text-align: center;
+
+    @include tab {
+      padding: 5px 30px;
+    }
+  }
+
+  > .expense.-active {
+    color: $white;
+    background-color: $purple;
+  }
+
+  > .income {
+    width: 50%;
+    padding: 15px 50px;
+    text-align: center;
+
+    @include tab {
+      padding: 5px 30px;
+    }
+  }
+
+  > .income.-active {
+    color: $white;
+    background-color: $purple;
+  }
+}
