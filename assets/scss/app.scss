@@ -20,17 +20,20 @@
 
 // components
 @import 'components/atoms/index-title-wrapper';
-@import 'components/atoms/expense-card';
-@import 'components/atoms/app-radiobutton';
-@import 'components/atoms/input-form-container';
 @import 'components/atoms/app-button';
-@import 'components/atoms/input-date-form';
+@import 'components/atoms/expense-tab-container';
 
 @import 'components/molecules/header-container';
+@import 'components/molecules/tab-menu-container';
+@import 'components/molecules/input-date-form';
+@import 'components/molecules/expense-card';
+@import 'components/molecules/app-radiobutton';
+@import 'components/molecules/app-input-form-container';
 
-@import 'components/organisms/form-container';
+@import 'components/organisms/input-form-container';
 
 @import 'components/pages/index-container';
+@import 'components/pages/test-container';
 
 // utilities
 @import 'utilities/main';

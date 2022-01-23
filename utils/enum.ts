@@ -16,3 +16,9 @@ export enum CategoryType {
   IncidentalIncome = '臨時収入',
   PocketMoney = 'お小遣い',
 }
+
+export enum TabMenuOption {
+  Home = 'Home',
+  Post = 'Post',
+  Report = 'Report',
+}

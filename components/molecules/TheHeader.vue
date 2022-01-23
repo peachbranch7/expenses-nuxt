@@ -1,7 +1,7 @@
 <template>
   <header class="header-container">
     <div class="container">
-      <h1 class="title">家計簿</h1>
+      <h1 class="title">Expenses</h1>
       <div class="humburger">aaaa</div>
     </div>
   </header>

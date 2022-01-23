@@ -19,7 +19,9 @@
           type="radio"
           name="inputName"
           value="option.category"
-          @change="$emit('change', option.id)"
+          @change="
+            $emit('change', getCategoryName(option.id, expenseType), option.id)
+          "
         />
         <img :src="getCategoryImage(option.category)" class="icon" />
         <p class="label">
@@ -32,7 +34,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
 import { CategoryItems } from '~/types/front-type';
-import { getCategoryImage } from '~/utils/helpers';
+import { getCategoryImage, getCategoryName } from '~/utils/helpers';
 
 export default defineComponent({
   props: {
@@ -52,10 +54,15 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    expenseType: {
+      type: Number,
+      default: 0,
+    },
   },
   setup() {
     return {
       getCategoryImage,
+      getCategoryName,
     };
   },
 });

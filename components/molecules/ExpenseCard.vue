@@ -1,7 +1,7 @@
 <template>
-  <article class="content">
+  <article class="expense-card">
     <template v-if="isActive === ExpenseType.Expense">
-      <ul v-for="item in expenseListItem" :key="item.id" class="expense-card">
+      <ul v-for="item in expenseListItem" :key="item.id" class="container">
         <li class="date -expense">
           {{ convertDateFormat(item.date) }}
         </li>
@@ -13,7 +13,7 @@
       </ul>
     </template>
     <template v-if="isActive === ExpenseType.Income">
-      <ul v-for="item in incomeListItem" :key="item.id" class="expense-card">
+      <ul v-for="item in incomeListItem" :key="item.id" class="container">
         <li class="date -income">
           {{ convertDateFormat(item.date) }}
         </li>

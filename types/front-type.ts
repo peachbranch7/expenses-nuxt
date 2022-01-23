@@ -20,3 +20,9 @@ export type FormValuesType = {
   price: string;
   memo: string;
 };
+
+export type TabMenuOption = {
+  label: String;
+  link: String;
+  isActive: String;
+};

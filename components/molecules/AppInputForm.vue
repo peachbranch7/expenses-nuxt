@@ -1,6 +1,6 @@
 <template>
   <ValidationProvider v-slot="{ errors }" :rules="rules">
-    <section class="input-form-container">
+    <section class="app-input-form-container">
       <h2 class="title">{{ label }}</h2>
       <input
         v-model="inputValue"
