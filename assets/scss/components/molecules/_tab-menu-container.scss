@@ -1,0 +1,30 @@
+.tab-menu-container {
+  > .list > .item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 40px 10px 20px;
+    margin: 10px 0;
+  }
+
+  > .list > .item.-active {
+    color: $white;
+    background-color: $purple;
+    border: 1px solid $purple;
+  }
+
+  > .list > .item > .link {
+    margin-left: 10px;
+    font-size: 1.6rem;
+    color: $black;
+  }
+
+  > .list > .item.-active > .link {
+    color: $white;
+  }
+
+  > .list > .item > .icon {
+    width: 32px;
+    height: 32px;
+  }
+}
