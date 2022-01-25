@@ -9,7 +9,10 @@
         :class="{ '-active': isActive === option.label }"
         @click="getTabMenuOption(option.label)"
       >
-        <HomeIcon class="icon" />
+        <HomeIcon v-if="option.label === 'Home'" class="icon" />
+        <ReportIcon v-if="option.label === 'Report'" class="icon" />
+        <CalendarIcon v-if="option.label === 'Calendar'" class="icon" />
+        <PostIcon v-if="option.label === 'Post'" class="icon" />
         <AppLink class="link">{{ option.label }}</AppLink>
       </li>
     </ul>
@@ -18,6 +21,9 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api';
 import HomeIcon from '~/components/atoms/icon/HomeIcon.vue';
+import ReportIcon from '~/components/atoms/icon/ReportIcon.vue';
+import CalendarIcon from '~/components/atoms/icon/CalendarIcon.vue';
+import PostIcon from '~/components/atoms/icon/PostIcon.vue';
 import AppLink from '~/components/atoms/AppLink.vue';
 import useUrls from '~/utils/useUrls';
 import { TabMenuOption } from '~/utils/enum';
@@ -25,6 +31,9 @@ import { TabMenuOption } from '~/utils/enum';
 export default defineComponent({
   components: {
     HomeIcon,
+    ReportIcon,
+    CalendarIcon,
+    PostIcon,
     AppLink,
   },
   props: {
@@ -41,9 +50,19 @@ export default defineComponent({
       emit('enter', isActive.value);
     };
 
+    const getActiveLabel = (label: string) => {
+      return {
+        HomeIcon: label === 'Home',
+        PostIcon: label === 'Post',
+        ReportIcon: label === 'Report',
+        CalendarIcon: label === 'Calendar',
+      };
+    };
+
     return {
       useUrls,
       isActive,
+      getActiveLabel,
       getTabMenuOption,
     };
   },

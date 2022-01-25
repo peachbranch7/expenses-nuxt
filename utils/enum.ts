@@ -21,4 +21,5 @@ export enum TabMenuOption {
   Home = 'Home',
   Post = 'Post',
   Report = 'Report',
+  Calendar = 'Calendar',
 }
