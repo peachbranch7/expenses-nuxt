@@ -21,8 +21,8 @@ export type FormValuesType = {
   memo: string;
 };
 
-export type TabMenuOption = {
-  label: String;
-  link: String;
-  isActive: String;
+export type TabMenuOptionType = {
+  label: string;
+  link: string;
+  isActive: string;
 };
