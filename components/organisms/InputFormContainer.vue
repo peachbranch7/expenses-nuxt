@@ -1,6 +1,5 @@
 <template>
   <div class="input-form-container">
-    <h2 class="title">Entry Form</h2>
     <ExpenseTab @change="(v) => (expenseType = v)" />
     <ValidationObserver
       ref="observer"
@@ -50,7 +49,6 @@
         >確認へ</AppButton
       >
     </ValidationObserver>
-    <button @click="add()">テスト</button>
   </div>
 </template>
 <script lang="ts">

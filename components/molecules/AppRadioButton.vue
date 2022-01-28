@@ -8,7 +8,6 @@
         class="radiobutton"
         :class="{
           '-checked': option.id === selectedOption,
-          '-income': isIncome,
         }"
         :for="option.id"
       >

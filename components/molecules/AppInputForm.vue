@@ -6,7 +6,6 @@
         v-model="inputValue"
         type="text"
         class="input"
-        :class="{ '-income': isIncome }"
         name="inputName"
         :placeholder="placeholder"
       />

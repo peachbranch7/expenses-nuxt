@@ -14,14 +14,16 @@
     width: 100%;
     height: 100%;
     padding: 10px 0;
+    color: $white;
     text-align: center;
-    border: 2px solid $purple;
+    background-color: $dark-navy;
+    border: 2px solid $dark-navy;
     border-radius: 6px;
   }
 
   > .radiobutton.-checked {
-    color: $white;
-    background-color: $purple;
+    color: $navy;
+    background-color: $white;
   }
 
   > .radiobutton.-income {

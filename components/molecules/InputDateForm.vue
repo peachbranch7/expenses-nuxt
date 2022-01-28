@@ -7,7 +7,6 @@
         class="input-date-form"
         :format="datePicker.format"
         :value="datePicker.date"
-        :class="{ '-income': isIncome }"
       />
       <P v-if="errors" class="caution">{{ errors[0] }}</P>
     </section>

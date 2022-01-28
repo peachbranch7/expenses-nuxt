@@ -6,7 +6,7 @@
       :expense-list-item="expenseArray"
       :income-list-item="incomeArray"
     />
-    <InputFormContainer v-if="isActive === TabMenuOption.Post" />
+    <InputFormContainer v-if="isActive === TabMenuOption.Home" />
   </section>
 </template>
 <script lang="ts">
