@@ -3,7 +3,6 @@
 @import 'settings/font';
 @import 'settings/media';
 @import 'settings/shadow';
-@import 'settings/root-font-size';
 
 // tools
 @import 'tools/main';
@@ -13,10 +12,6 @@
 
 // elements
 @import 'elements/main';
-
-// objects
-@import 'objects/common-container';
-@import 'objects/flex-container';
 
 // components
 @import 'components/atoms/index-title-wrapper';

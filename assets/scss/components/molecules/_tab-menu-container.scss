@@ -9,14 +9,14 @@
 
   > .list > .item.-active {
     color: $white;
-    background-color: $purple;
-    border: 1px solid $purple;
+    background-color: $dark-navy;
+    border: 1px solid $dark-navy;
   }
 
   > .list > .item > .link {
     margin-left: 10px;
     font-size: 1.6rem;
-    color: $black;
+    color: $white;
   }
 
   > .list > .item.-active > .link {

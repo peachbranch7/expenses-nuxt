@@ -19,7 +19,7 @@
   </section>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { defineComponent, ref, PropType } from '@nuxtjs/composition-api';
 import HomeIcon from '~/components/atoms/icon/HomeIcon.vue';
 import ReportIcon from '~/components/atoms/icon/ReportIcon.vue';
 import CalendarIcon from '~/components/atoms/icon/CalendarIcon.vue';
@@ -27,6 +27,7 @@ import PostIcon from '~/components/atoms/icon/PostIcon.vue';
 import AppLink from '~/components/atoms/AppLink.vue';
 import useUrls from '~/utils/useUrls';
 import { TabMenuOption } from '~/utils/enum';
+import { TabMenuOptionType } from '~/types/front-type';
 
 export default defineComponent({
   components: {
@@ -38,7 +39,7 @@ export default defineComponent({
   },
   props: {
     options: {
-      type: Array,
+      type: Array as PropType<TabMenuOptionType[]>,
       default: () => [],
     },
   },

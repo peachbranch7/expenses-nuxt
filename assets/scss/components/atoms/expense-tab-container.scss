@@ -2,12 +2,11 @@
   display: flex;
   justify-content: space-between;
   max-width: 500px;
-  // padding: 10px 0;
   margin: 0 auto;
   margin-bottom: 30px;
   font-size: 1.8rem;
   font-weight: bold;
-  border: 2px solid $purple;
+  border: 2px solid $dark-navy;
   border-radius: 6px;
 
   @include tab {
@@ -17,6 +16,7 @@
   > .expense {
     width: 50%;
     padding: 15px 50px;
+    color: $white;
     text-align: center;
 
     @include tab {
@@ -25,13 +25,14 @@
   }
 
   > .expense.-active {
-    color: $white;
-    background-color: $purple;
+    color: $navy;
+    background-color: $white;
   }
 
   > .income {
     width: 50%;
     padding: 15px 50px;
+    color: $white;
     text-align: center;
 
     @include tab {
@@ -40,7 +41,7 @@
   }
 
   > .income.-active {
-    color: $white;
-    background-color: $purple;
+    color: $navy;
+    background-color: $white;
   }
 }

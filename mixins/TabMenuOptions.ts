@@ -1,7 +1,7 @@
-import { TabMenuOption } from '~/types/front-type';
+import { TabMenuOptionType } from '~/types/front-type';
 import useUrls from '~/utils/useUrls';
 
-export const tabMenuOptions: TabMenuOption[] = [
+export const tabMenuOptions: TabMenuOptionType[] = [
   {
     label: 'Home',
     link: useUrls.topLink,
