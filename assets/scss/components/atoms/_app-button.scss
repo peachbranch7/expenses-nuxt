@@ -2,21 +2,22 @@
   display: flex;
   padding: 10px 20px;
   margin: 30px auto 0;
-  color: $white;
-  background-color: $purple;
-  border: 2px solid $purple;
+  font-weight: bold;
+  color: $black;
+  background-color: $white;
+  border: 2px solid $white;
   border-radius: 6px;
-
-  &.-income {
-    color: $white;
-    background-color: $red-coral;
-    border: 2px solid $red-coral;
-  }
 
   &.-disabled {
     color: $white;
     pointer-events: none;
-    background-color: $grey-fortress-grey;
-    border: 2px solid $grey-fortress-grey;
+    background-color: $dark-navy;
+    border: 2px solid $dark-navy;
+  }
+
+  &.-navy {
+    color: $white;
+    background-color: $navy;
+    border: 1px solid $navy;
   }
 }

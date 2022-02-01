@@ -16,10 +16,19 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    colorOption: {
+      type: String,
+      default: 'white',
+    },
   },
   setup(props) {
     const style = computed(() => {
-      return { '-income': props.isIncome, '-disabled': props.disabled };
+      return {
+        '-income': props.isIncome,
+        '-disabled': props.disabled,
+        '-white': props.colorOption === 'white',
+        '-navy': props.colorOption === 'navy',
+      };
     });
     return {
       style,
