@@ -1,5 +1,6 @@
 .index-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 180px 800px 1fr;
   gap: 50px;
   padding: 50px 30px;
   background-color: $navy;
