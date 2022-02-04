@@ -1,6 +1,6 @@
 <template>
   <div class="input-form-container">
-    <ExpenseTab @change="(v) => (expenseType = v)" />
+    <BasicExpenseTab @change="(v) => (expenseType = v)" />
     <ValidationObserver
       ref="observer"
       v-slot="{ invalid }"
@@ -61,12 +61,11 @@ import AppButton from '~/components/atoms/AppButton.vue';
 import { FormValuesType } from '~/types/front-type';
 import InputDateForm from '~/components/molecules/InputDateForm.vue';
 import { ExpenseType } from '~/utils/enum';
-import db from '~/plugins/firebase';
 import { formValuesStore } from '@/store';
 import { expenseOptions, incomeOptions } from '~/mixins/categoryItems';
-import { getCategoryName } from '~/utils/helpers';
+import BasicExpenseTab from '~/components/atoms/BasicExpenseTab.vue';
 import useCollection from '~/compositions/useCollection';
-import ExpenseTab from '~/components/atoms/ExpenseTab.vue';
+import db from '~/plugins/firebase';
 
 export default defineComponent({
   components: {
@@ -75,7 +74,7 @@ export default defineComponent({
     AppInputForm,
     AppButton,
     InputDateForm,
-    ExpenseTab,
+    BasicExpenseTab,
   },
   setup() {
     const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
@@ -85,9 +84,9 @@ export default defineComponent({
     const expenseArray = ref<any>([]);
     const incomeArray = ref<any>([]);
     const selectedOption = ref<number>(1);
-    const expenseRef: CollectionReference<any> = collection(db, 'expense');
+    // const expenseRef: CollectionReference<any> = collection(db, 'expense');
     // const incomeRef: CollectionReference<any> = collection(db, 'income');
-    const isActiveModal = ref<boolean>(false);
+    // const isActiveModal = ref<boolean>(false);
 
     const getSelectedOption = (id: number): void => {
       if (!selectedOption.value) return;
@@ -107,17 +106,22 @@ export default defineComponent({
       category: '',
     });
 
+    const confirm = () => {
+      formValuesStore.dispatchFormValues(formValues.value);
+      // emit('click', (isActiveModal.value = true));
+    };
+
+    const expenseRef: CollectionReference<any> = collection(db, 'expense');
     const { add } = useCollection(expenseRef);
 
     const save = async () => {
-      formValuesStore.dispatchFormValues(formValues.value);
       await add({
         date: formValues.value.date,
         price: formValues.value.price,
         memo: formValues.value.memo,
-        category: getCategoryName(selectedOption.value, expenseType.value),
+        category: formValues.value.category,
+        // category: getCategoryName(selectedOption.value, expenseType.value),
       });
-      isActiveModal.value = true;
     };
 
     const onClick = (category: string, selectedOption: number) => {
@@ -134,9 +138,10 @@ export default defineComponent({
       ExpenseType,
       expenseArray,
       incomeArray,
-      save,
+      confirm,
       formValues,
       onClick,
+      save,
     };
   },
 });

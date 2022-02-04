@@ -1,5 +1,5 @@
 <template>
-  <ul class="expense-tab-container">
+  <ul class="basic-expense-tab-container">
     <li
       class="expense"
       :class="{ '-active': expenseType === ExpenseType.Expense }"
