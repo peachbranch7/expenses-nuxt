@@ -16,7 +16,7 @@
 // components
 @import 'components/atoms/index-title-wrapper';
 @import 'components/atoms/app-button';
-@import 'components/atoms/expense-tab-container';
+@import 'components/atoms/basic-expense-tab-container';
 
 @import 'components/molecules/header-container';
 @import 'components/molecules/app-tab-menu-container';
@@ -24,6 +24,7 @@
 @import 'components/molecules/expense-card';
 @import 'components/molecules/app-radiobutton';
 @import 'components/molecules/app-input-form-container';
+@import 'components/molecules/app-modal';
 
 @import 'components/organisms/input-form-container';
 
