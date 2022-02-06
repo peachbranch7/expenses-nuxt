@@ -18,21 +18,22 @@ import { usersDocRef } from '~/utils/useFirestore';
   namespaced: true,
 })
 export default class Auth extends VuexModule {
+  // TODO: any警察
   private user: any = {
     loggedIn: false,
     userUid: '',
     userName: '',
   };
 
-  getUserUid() {
+  get getUserUid() {
     return this.user.userUid;
   }
 
-  getUserName() {
+  get getUserName() {
     return this.user.userName;
   }
 
-  getUserLoggedIn() {
+  get getUserLoggedIn() {
     return this.user.loggedIn;
   }
 
@@ -139,6 +140,7 @@ export default class Auth extends VuexModule {
   @Action
   public onAuth() {
     const auth = getAuth();
+    // TODO: any警察
     onAuthStateChanged(auth, (user: any) => {
       user = user || {};
       this.setUserUid(user.uid);
