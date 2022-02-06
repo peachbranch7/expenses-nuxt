@@ -47,6 +47,10 @@ const config: NuxtConfig = {
     // '@nuxtjs/firebase',
   ],
 
+  router: {
+    middleware: ['checkAuth'],
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
