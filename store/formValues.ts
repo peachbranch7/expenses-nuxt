@@ -8,6 +8,7 @@ import { FormValuesType } from '~/types/front-type';
 })
 export default class FormValues extends VuexModule {
   private formValues: FormValuesType = {
+    uid: '',
     date: '',
     category: '',
     price: '',

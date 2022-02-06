@@ -61,11 +61,11 @@ import AppButton from '~/components/atoms/AppButton.vue';
 import { FormValuesType } from '~/types/front-type';
 import InputDateForm from '~/components/molecules/InputDateForm.vue';
 import { ExpenseType } from '~/utils/enum';
-import { formValuesStore } from '@/store';
+import { formValuesStore, authStore } from '@/store';
 import { expenseOptions, incomeOptions } from '~/mixins/categoryItems';
 import BasicExpenseTab from '~/components/atoms/BasicExpenseTab.vue';
 import useCollection from '~/compositions/useCollection';
-import db from '~/plugins/firebase';
+import { db } from '~/plugins/firebase';
 
 export default defineComponent({
   components: {
@@ -81,6 +81,7 @@ export default defineComponent({
       ExpenseType.Expense,
     );
 
+    // TODO: any警察
     const expenseArray = ref<any>([]);
     const incomeArray = ref<any>([]);
     const selectedOption = ref<number>(1);
@@ -100,6 +101,7 @@ export default defineComponent({
     };
 
     const formValues = ref<FormValuesType>({
+      uid: '',
       date: '',
       price: '',
       memo: '',
@@ -111,11 +113,14 @@ export default defineComponent({
       // emit('click', (isActiveModal.value = true));
     };
 
+    // TODO: any警察
     const expenseRef: CollectionReference<any> = collection(db, 'expense');
     const { add } = useCollection(expenseRef);
+    const currentUserId: string = authStore.getUserUid;
 
     const save = async () => {
       await add({
+        uid: currentUserId,
         date: formValues.value.date,
         price: formValues.value.price,
         memo: formValues.value.memo,
