@@ -15,6 +15,7 @@ export type CategoryItems = {
 }[];
 
 export type FormValuesType = {
+  uid: string;
   date: string;
   category: string;
   price: string;
