@@ -26,7 +26,10 @@ const config: NuxtConfig = {
   css: ['@/assets/scss/app.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/firebase.ts'],
+  plugins: [
+    '~/plugins/firebase.ts',
+    { src: '~/plugins/localStorage.ts', mode: 'client' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
