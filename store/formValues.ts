@@ -15,8 +15,7 @@ export default class FormValues extends VuexModule {
     memo: '',
   };
 
-  @Mutation
-  public getFormValues() {
+  get getFormValues() {
     return this.formValues;
   }
 
@@ -25,16 +24,21 @@ export default class FormValues extends VuexModule {
     return (this.formValues = data);
   }
 
+  @Mutation
+  private initFormValues() {
+    this.formValues.category = '';
+    this.formValues.date = '';
+    this.formValues.price = '';
+    this.formValues.memo = '';
+  }
+
   @Action
   public dispatchFormValues(data: FormValuesType) {
     return this.setFormValues(data);
   }
 
   @Action
-  public initFormValues() {
-    this.formValues.category = '';
-    this.formValues.date = '';
-    this.formValues.price = '';
-    this.formValues.memo = '';
+  public dispatchInitFormValues() {
+    return this.initFormValues();
   }
 }

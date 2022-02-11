@@ -45,7 +45,7 @@
       <AppButton
         :is-income="expenseType === ExpenseType.Income"
         :disabled="invalid"
-        @click="save()"
+        @click="confirmFormValues"
         >確認へ</AppButton
       >
     </ValidationObserver>
@@ -54,7 +54,6 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api';
 import { ValidationObserver } from 'vee-validate';
-import { collection, CollectionReference } from 'firebase/firestore';
 import AppRadioButton from '~/components/molecules/AppRadioButton.vue';
 import AppInputForm from '~/components/molecules/AppInputForm.vue';
 import AppButton from '~/components/atoms/AppButton.vue';
@@ -64,8 +63,6 @@ import { ExpenseType } from '~/utils/enum';
 import { formValuesStore, authStore } from '@/store';
 import { expenseOptions, incomeOptions } from '~/mixins/categoryItems';
 import BasicExpenseTab from '~/components/atoms/BasicExpenseTab.vue';
-import useCollection from '~/compositions/useCollection';
-import { db } from '~/plugins/firebase';
 
 export default defineComponent({
   components: {
@@ -76,7 +73,7 @@ export default defineComponent({
     InputDateForm,
     BasicExpenseTab,
   },
-  setup() {
+  setup(_, { emit }) {
     const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
       ExpenseType.Expense,
     );
@@ -85,9 +82,8 @@ export default defineComponent({
     const expenseArray = ref<any>([]);
     const incomeArray = ref<any>([]);
     const selectedOption = ref<number>(1);
-    // const expenseRef: CollectionReference<any> = collection(db, 'expense');
-    // const incomeRef: CollectionReference<any> = collection(db, 'income');
-    // const isActiveModal = ref<boolean>(false);
+    const isActiveModal = ref<boolean>(false);
+    const currentUserId: string = authStore.getUserUid;
 
     const getSelectedOption = (id: number): void => {
       if (!selectedOption.value) return;
@@ -101,37 +97,21 @@ export default defineComponent({
     };
 
     const formValues = ref<FormValuesType>({
-      uid: '',
+      uid: currentUserId,
       date: '',
       price: '',
       memo: '',
       category: '',
     });
 
-    const confirm = () => {
-      formValuesStore.dispatchFormValues(formValues.value);
-      // emit('click', (isActiveModal.value = true));
-    };
-
-    // TODO: any警察
-    const expenseRef: CollectionReference<any> = collection(db, 'expense');
-    const { add } = useCollection(expenseRef);
-    const currentUserId: string = authStore.getUserUid;
-
-    const save = async () => {
-      await add({
-        uid: currentUserId,
-        date: formValues.value.date,
-        price: formValues.value.price,
-        memo: formValues.value.memo,
-        category: formValues.value.category,
-        // category: getCategoryName(selectedOption.value, expenseType.value),
-      });
-    };
-
     const onClick = (category: string, selectedOption: number) => {
       formValues.value.category = category;
       getSelectedOption(selectedOption);
+    };
+
+    const confirmFormValues = () => {
+      formValuesStore.dispatchFormValues(formValues.value);
+      emit('click', (isActiveModal.value = true));
     };
 
     return {
@@ -143,10 +123,9 @@ export default defineComponent({
       ExpenseType,
       expenseArray,
       incomeArray,
-      confirm,
+      confirmFormValues,
       formValues,
       onClick,
-      save,
     };
   },
 });

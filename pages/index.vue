@@ -10,8 +10,10 @@
       @click="(v) => (isOpenModal = v)"
       @change-tab="(v) => (expenseType = v)"
     />
-    <AppModalContainer v-if="isOpenModal"></AppModalContainer>
-    {{ isOpenModal }}
+    <AppModalContainer
+      v-if="isOpenModal"
+      @send="(v) => (isOpenModal = v)"
+    ></AppModalContainer>
   </section>
 </template>
 <script lang="ts">
@@ -45,7 +47,7 @@ export default defineComponent({
     const incomeArray = ref<any>([]);
     // const incomeRef = collection(db, 'income');
 
-    const currentUserId: string = authStore.getUserUid;
+    const currentUserId = authStore.getUserUid;
 
     // TODO: any警察
     const expenseRef: any = query(
