@@ -77,6 +77,18 @@ export const getCategoryImage = (category: string): string => {
 };
 
 /**
+ *  TimeZornのdateを変換する処理
+ * @param date
+ * @returns
+ */
+
+export const convertTimeZornFormat = (date: Date) => {
+  return (
+    date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日'
+  );
+};
+
+/**
  *  timestamp型のdateのformatを変換する処理
  */
 
