@@ -87,7 +87,10 @@ export default class Auth extends VuexModule {
       });
 
     await setPersistence(auth, browserSessionPersistence)
-      .then(() => {
+      .then((user: any) => {
+        this.setLoginStatus(true);
+        this.setUserUid(user.uid);
+        this.setUserName(user.displayName!);
         console.log('keeping user');
       })
       .catch((error) => {
@@ -131,6 +134,8 @@ export default class Auth extends VuexModule {
     signOut(auth)
       .then(() => {
         this.setLoginStatus(false);
+        this.setUserName('');
+        this.setUserUid('');
       })
       .catch((error) => {
         console.error('logout error', error);
