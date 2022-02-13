@@ -4,6 +4,6 @@ import createPersistedState from 'vuex-persistedstate';
 export default ({ store }: Context) => {
   createPersistedState({
     key: 'app',
-    paths: ['auth'],
+    paths: ['auth', 'formValues'],
   })(store);
 };
