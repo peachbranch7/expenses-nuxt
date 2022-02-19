@@ -20,6 +20,7 @@ export default defineComponent({
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
+        right: '',
       },
       initialView: 'dayGridMonth',
     };
