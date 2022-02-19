@@ -20,6 +20,10 @@
     "*.{css,scss,vue}": "stylelint"
   },
   "dependencies": {
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/interaction": "^5.10.1",
+    "@fullcalendar/vue": "^5.10.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.30.0",
     "@nuxtjs/dotenv": "^1.4.1",
