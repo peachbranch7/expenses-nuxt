@@ -78,9 +78,6 @@ export default defineComponent({
       ExpenseType.Expense,
     );
 
-    // TODO: any警察
-    const expenseArray = ref<any>([]);
-    const incomeArray = ref<any>([]);
     const selectedOption = ref<number>(1);
     const isActiveModal = ref<boolean>(false);
     const currentUserId: string = authStore.getUserUid;
@@ -121,8 +118,6 @@ export default defineComponent({
       getSelectedOption,
       selectedOption,
       ExpenseType,
-      expenseArray,
-      incomeArray,
       confirmFormValues,
       formValues,
       onClick,

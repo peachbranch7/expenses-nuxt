@@ -27,3 +27,9 @@ export type TabMenuOptionType = {
   link: string;
   isActive: string;
 };
+
+export type UserType = {
+  loggedIn: boolean;
+  uid: string;
+  name: string;
+};

@@ -29,6 +29,7 @@ import { db } from '~/plugins/firebase';
 import InputFormContainer from '~/components/organisms/InputFormContainer.vue';
 import AppModalContainer from '~/components/organisms/AppModalContainer.vue';
 import { authStore } from '@/store';
+import { FormValuesType } from '~/types/front-type';
 
 export default defineComponent({
   components: {
@@ -42,22 +43,21 @@ export default defineComponent({
     const isActive = ref<string>(TabMenuOption.Home);
     const isOpenModal = ref<boolean>(false);
 
-    // TODO: any警察
-    const expenseArray = ref<any>([]);
-    const incomeArray = ref<any>([]);
+    const expenseArray = ref<FormValuesType[]>([]);
+    const incomeArray = ref<FormValuesType[]>([]);
     // const incomeRef = collection(db, 'income');
 
     const currentUserId = authStore.getUserUid;
 
     // TODO: any警察
-    const expenseRef: any = query(
+    const expenseRef = query(
       collection(db, 'expense'),
       where('uid', '==', currentUserId),
     );
 
     // TODO: any警察
     onBeforeMount(() => {
-      onSnapshot(expenseRef, (snapshot: any) => {
+      onSnapshot(expenseRef, (snapshot) => {
         snapshot.docChanges().forEach((change: any) => {
           return expenseArray.value.push(change.doc.data());
         });
