@@ -2,9 +2,13 @@ import { ref } from '@nuxtjs/composition-api';
 import { addDoc } from 'firebase/firestore';
 import { FormValuesType } from '~/types/front-type';
 
-// TODO: any警察
+/**
+ *  HACK: 今のところCollectionの型はFormValuesのみ
+ *  Converterに定義する
+ *  */
 const useCollection = (collection: any) => {
-  const error = ref<string | null>(null); // collectionはいろいろあるので複数のエラーが考えられる。そのため毎回errorを作成できるように関数内で宣言する
+  // NOTE:collectionはいろいろあるので複数のエラーが考えられる。そのため毎回errorを作成できるように関数内で宣言する
+  const error = ref<string | null>(null);
 
   const add = async (doc: FormValuesType) => {
     error.value = null;

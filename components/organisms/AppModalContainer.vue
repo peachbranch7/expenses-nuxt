@@ -25,7 +25,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api';
-import { collection, CollectionReference } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import AppModal from '~/components/molecules/AppModal.vue';
 import { authStore, formValuesStore } from '@/store';
 import AppButton from '~/components/atoms/AppButton.vue';
@@ -40,8 +40,8 @@ export default defineComponent({
     AppButton,
   },
   setup(_, { emit }) {
-    // TODO: any警察
-    const expenseRef: CollectionReference<any> = collection(db, 'expense');
+    // TODO: Converterを定義する
+    const expenseRef = collection(db, 'expense');
     const { add } = useCollection(expenseRef);
     const currentUserId = authStore.getUserUid;
 

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import '@fullcalendar/core/vdom'; // solves problem with Vite
+import '@fullcalendar/core/vdom';
 import { defineComponent } from '@nuxtjs/composition-api';
 import FullCalendar from '@fullcalendar/vue';
 import dayGridPlugin from '@fullcalendar/daygrid';
