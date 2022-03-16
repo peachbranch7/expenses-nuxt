@@ -11,6 +11,7 @@ import {
 } from 'firebase/auth';
 import { setDoc, getDoc } from 'firebase/firestore';
 import { usersDocRef } from '~/utils/useFirestore';
+import { UserType } from '~/types/front-type';
 
 @Module({
   name: 'auth',
@@ -18,19 +19,18 @@ import { usersDocRef } from '~/utils/useFirestore';
   namespaced: true,
 })
 export default class Auth extends VuexModule {
-  // TODO: any警察
-  private user: any = {
+  private user: UserType = {
     loggedIn: false,
-    userUid: '',
-    userName: '',
+    uid: '',
+    name: '',
   };
 
   get getUserUid() {
-    return this.user.userUid;
+    return this.user.uid;
   }
 
   get getUserName() {
-    return this.user.userName;
+    return this.user.name;
   }
 
   get getUserLoggedIn() {
@@ -44,12 +44,12 @@ export default class Auth extends VuexModule {
 
   @Mutation
   public setUserUid(uid: string) {
-    this.user.userUid = uid;
+    this.user.uid = uid;
   }
 
   @Mutation
   public setUserName(name: string) {
-    this.user.userName = name;
+    this.user.name = name;
   }
 
   @Action
@@ -145,12 +145,13 @@ export default class Auth extends VuexModule {
   @Action
   public onAuth() {
     const auth = getAuth();
-    // TODO: any警察
-    onAuthStateChanged(auth, (user: any) => {
-      user = user || {};
-      this.setUserUid(user.uid);
-      this.setUserName(user.displayName!);
-      this.setLoginStatus(!!user.uid);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        user = user || {};
+        this.setUserUid(user.uid);
+        this.setUserName(user.displayName ?? '');
+        this.setLoginStatus(!!user.uid);
+      }
     });
   }
 }

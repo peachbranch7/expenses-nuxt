@@ -4,8 +4,7 @@ import { authStore } from '@/store';
 
 export default function ({ redirect, route }: Context) {
   const auth = getAuth();
-  // TODO: any警察
-  onAuthStateChanged(auth, (user: any) => {
+  onAuthStateChanged(auth, (user) => {
     if (user) {
       user = user || {};
       authStore.setUserUid(user.uid);
