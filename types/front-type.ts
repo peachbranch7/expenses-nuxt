@@ -13,6 +13,7 @@ export type CategoryItems = Pick<CardListItem, 'id' | 'category'> & {
 
 export type FormValuesType = {
   uid: string;
+  postType: 0 | 1;
   date: string;
   category: string;
   price: string;

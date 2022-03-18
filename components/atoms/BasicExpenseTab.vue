@@ -2,15 +2,15 @@
   <ul class="basic-expense-tab-container">
     <li
       class="expense"
-      :class="{ '-active': expenseType === ExpenseType.Expense }"
-      @click="$emit('change', changeTab(ExpenseType.Expense))"
+      :class="{ '-active': postType === PostType.Expense }"
+      @click="$emit('change', changeTab(PostType.Expense))"
     >
       支出
     </li>
     <li
       class="income"
-      :class="{ '-active': expenseType === ExpenseType.Income }"
-      @click="$emit('change', changeTab(ExpenseType.Income))"
+      :class="{ '-active': postType === PostType.Income }"
+      @click="$emit('change', changeTab(PostType.Income))"
     >
       収入
     </li>
@@ -18,25 +18,23 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from '@nuxtjs/composition-api';
-import { ExpenseType } from '~/utils/enum';
+import { PostType } from '~/utils/enum';
 
 export default defineComponent({
   setup() {
-    const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
-      ExpenseType.Expense,
-    );
+    const postType = ref<PostType.Expense | PostType.Income>(PostType.Expense);
 
     const changeTab = computed(
       () =>
-        (val: ExpenseType.Expense | ExpenseType.Income): ExpenseType => {
-          return (expenseType.value = val);
+        (val: PostType.Expense | PostType.Income): PostType => {
+          return (postType.value = val);
         },
     );
 
     return {
       changeTab,
-      expenseType,
-      ExpenseType,
+      postType,
+      PostType,
     };
   },
 });

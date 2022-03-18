@@ -9,6 +9,7 @@ import { FormValuesType } from '~/types/front-type';
 export default class FormValues extends VuexModule {
   private formValues: FormValuesType = {
     uid: '',
+    postType: 0,
     date: '',
     category: '',
     price: '',
@@ -26,6 +27,8 @@ export default class FormValues extends VuexModule {
 
   @Mutation
   private initFormValues() {
+    this.formValues.uid = '';
+    this.formValues.postType = 0;
     this.formValues.category = '';
     this.formValues.date = '';
     this.formValues.price = '';

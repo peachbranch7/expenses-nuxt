@@ -43,9 +43,9 @@ export default defineComponent({
     AppButton,
   },
   setup(_, { emit }) {
-    // TODO: Converterを定義する
-    const expenseRef = collection(db, 'expense');
-    const { add } = useCollection(expenseRef);
+    // TODO: Converterを定義する;
+    const postsRef = collection(db, 'posts');
+    const { add } = useCollection(postsRef);
     const currentUserId = authStore.getUserUid;
 
     const formValues = ref<FormValuesType>(formValuesStore.getFormValues);
@@ -53,6 +53,7 @@ export default defineComponent({
     const save = async () => {
       await add({
         uid: currentUserId,
+        postType: formValues.value.postType,
         date: formValues.value.date,
         price: formValues.value.price,
         memo: formValues.value.memo,
