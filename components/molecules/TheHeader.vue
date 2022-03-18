@@ -1,15 +1,24 @@
 <template>
   <header class="header-container">
     <div class="container">
-      <h1 class="title">Expenses</h1>
+      <AppLink :to="useUrls.topLink" class="title">Expenses</AppLink>
       <div class="humburger">aaaa</div>
     </div>
   </header>
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
+import AppLink from '@/components/atoms/AppLink.vue';
+import useUrls from '@/utils/useUrls';
 
 export default defineComponent({
-  setup() {},
+  components: {
+    AppLink,
+  },
+  setup() {
+    return {
+      useUrls,
+    };
+  },
 });
 </script>

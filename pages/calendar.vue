@@ -1,5 +1,11 @@
 <template>
-  <FullCalendar locale="ja" :options="calendarOptions" locales="{allLocales}" />
+  <div class="calendar-container">
+    <FullCalendar
+      locale="ja"
+      :options="calendarOptions"
+      locales="{allLocales}"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -9,6 +15,7 @@ import FullCalendar from '@fullcalendar/vue';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import allLocales from '@fullcalendar/core/locales-all';
+import { tabMenuOptions } from '~/mixins/TabMenuOptions';
 
 export default defineComponent({
   components: {
@@ -27,6 +34,7 @@ export default defineComponent({
     return {
       calendarOptions,
       allLocales,
+      tabMenuOptions,
     };
   },
 });
