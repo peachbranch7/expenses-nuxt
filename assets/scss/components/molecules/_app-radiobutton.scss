@@ -1,11 +1,18 @@
 .app-radiobutton {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  width: 100%;
-  outline: none;
+  > .title {
+    margin-bottom: 5px;
+    color: $white;
+  }
 
-  > .radiobutton {
+  > .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    outline: none;
+  }
+
+  > .container > .radiobutton {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -21,12 +28,12 @@
     border-radius: 6px;
   }
 
-  > .radiobutton.-checked {
+  > .container > .radiobutton.-checked {
     color: $navy;
     background-color: $white;
   }
 
-  > .radiobutton.-income {
+  > .container > .radiobutton.-income {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -40,16 +47,16 @@
     border-radius: 6px;
   }
 
-  > .radiobutton.-income.-checked {
+  > .container > .radiobutton.-income.-checked {
     background-color: $purple;
   }
 
-  > .radiobutton > .icon {
+  > .container > .radiobutton > .icon {
     width: 30px;
     height: 30px;
   }
 
-  > .radiobutton > .label {
+  > .container > .radiobutton > .label {
     font-weight: bold;
   }
 }

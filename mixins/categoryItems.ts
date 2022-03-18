@@ -1,6 +1,6 @@
 import { CategoryItems } from '~/types/front-type';
 
-export const expenseOptions: CategoryItems = [
+export const expenseOptions: CategoryItems[] = [
   {
     id: 1,
     category: '食費',
@@ -33,7 +33,7 @@ export const expenseOptions: CategoryItems = [
   },
 ];
 
-export const incomeOptions: CategoryItems = [
+export const incomeOptions: CategoryItems[] = [
   {
     id: 1,
     category: '給料',

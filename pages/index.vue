@@ -13,6 +13,7 @@
     <AppModalContainer
       v-if="isOpenModal"
       @send="(v) => (isOpenModal = v)"
+      @close="isOpenModal = false"
     ></AppModalContainer>
   </section>
 </template>

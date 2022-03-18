@@ -1,6 +1,11 @@
 .app-input-form-container {
   margin-bottom: 30px;
 
+  > .title {
+    margin-bottom: 5px;
+    color: $white;
+  }
+
   > .input {
     width: 100%;
     padding: 10px;

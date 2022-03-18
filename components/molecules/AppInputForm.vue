@@ -7,6 +7,7 @@
         type="text"
         class="input"
         name="inputName"
+        autocomplete="off"
         :placeholder="placeholder"
       />
       <P v-if="errors" class="caution">{{ errors[0] }}</P>

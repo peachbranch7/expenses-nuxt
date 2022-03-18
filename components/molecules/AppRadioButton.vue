@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <h2>{{ label }}</h2>
-    <div class="app-radiobutton">
+  <section class="app-radiobutton">
+    <h2 class="title">{{ label }}</h2>
+    <div class="container">
       <label
         v-for="option in options"
         :key="option.id + option.category"
@@ -38,7 +38,7 @@ import { getCategoryImage, getCategoryName } from '~/utils/helpers';
 export default defineComponent({
   props: {
     options: {
-      type: Array as PropType<CategoryItems>,
+      type: Array as PropType<CategoryItems[]>,
       required: true,
     },
     label: {
