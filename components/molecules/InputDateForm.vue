@@ -1,10 +1,10 @@
 <template>
   <ValidationProvider v-slot="{ errors }" :rules="rules">
-    <section>
-      <h2>{{ label }}</h2>
+    <section class="input-date-form">
+      <h2 class="title">{{ label }}</h2>
       <Datepicker
         v-model="inputValue"
-        class="input-date-form"
+        class="form"
         :format="datePicker.format"
         :value="datePicker.date"
       />

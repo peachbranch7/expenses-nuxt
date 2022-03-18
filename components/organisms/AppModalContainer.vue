@@ -4,7 +4,9 @@
       <ul class="container">
         <li class="list">
           <h2 class="title">日付</h2>
-          <!-- <p class="text">{{ convertTimeZornFormat(formValues.date) }}</p> -->
+          <p class="text">
+            {{ convertTimeZornFormat(new Date(formValues.date)) }}
+          </p>
         </li>
         <li>
           <h2 class="title">金額</h2>
@@ -20,6 +22,7 @@
         </li>
         <AppButton color-option="navy" @click="save()">送信</AppButton>
       </ul>
+      <div class="mask" @click="$emit('close')"></div>
     </template>
   </AppModal>
 </template>

@@ -4,6 +4,7 @@ import { authStore } from '@/store';
 
 export default function ({ redirect, route }: Context) {
   const auth = getAuth();
+  // TODO: 型つける？
   onAuthStateChanged(auth, (user) => {
     if (user) {
       user = user || {};

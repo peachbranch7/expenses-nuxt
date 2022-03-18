@@ -1,13 +1,25 @@
 .input-date-form {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 30px;
-  color: $white;
-  background-color: $dark-navy;
-  border: 2px solid $dark-navy;
-  border-radius: 6px;
+  > .title {
+    margin-bottom: 5px;
+    color: $white;
+  }
 
-  &.-income {
+  > .form {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: $dark-navy;
+    border: 2px solid $dark-navy;
+    border-radius: 6px;
+  }
+
+  > .form.-income {
     border: 2px solid $red-coral;
   }
+}
+
+// NOTE: ライブラリのスタイルを修正するために使用
+/* stylelint-disable-next-line rscss/no-descendant-combinator */
+.vdp-datepicker > div > input {
+  color: $white;
 }

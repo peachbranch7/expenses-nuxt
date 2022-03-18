@@ -20,7 +20,7 @@ import { convertDateFormat, getCategoryImage } from '~/utils/helpers';
 export default defineComponent({
   props: {
     expenseListItem: {
-      type: Array as PropType<CardListItem>,
+      type: Array as PropType<CardListItem[]>,
       required: true,
     },
 

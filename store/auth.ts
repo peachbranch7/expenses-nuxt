@@ -145,11 +145,12 @@ export default class Auth extends VuexModule {
   @Action
   public onAuth() {
     const auth = getAuth();
+    // TODO: 型つける？
     onAuthStateChanged(auth, (user) => {
       if (user) {
         user = user || {};
         this.setUserUid(user.uid);
-        this.setUserName(user.displayName ?? '');
+        this.setUserName(user.displayName!);
         this.setLoginStatus(!!user.uid);
       }
     });

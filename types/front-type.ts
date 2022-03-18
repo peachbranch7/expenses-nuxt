@@ -4,15 +4,12 @@ export type CardListItem = {
   id: number;
   date: Dayjs;
   category: string;
-  img: string;
   price: string;
-}[];
+};
 
-export type CategoryItems = {
-  id: number;
-  category: string;
+export type CategoryItems = Pick<CardListItem, 'id' | 'category'> & {
   image: string;
-}[];
+};
 
 export type FormValuesType = {
   uid: string;
