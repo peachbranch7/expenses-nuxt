@@ -12,7 +12,6 @@
         <HomeIcon v-if="option.label === 'Home'" class="icon" />
         <ReportIcon v-if="option.label === 'Report'" class="icon" />
         <CalendarIcon v-if="option.label === 'Calendar'" class="icon" />
-        <PostIcon v-if="option.label === 'Post'" class="icon" />
         <AppLink :to="option.link" class="link">{{ option.label }}</AppLink>
       </li>
     </ul>
@@ -28,7 +27,6 @@ import {
 import HomeIcon from '~/components/atoms/icon/HomeIcon.vue';
 import ReportIcon from '~/components/atoms/icon/ReportIcon.vue';
 import CalendarIcon from '~/components/atoms/icon/CalendarIcon.vue';
-import PostIcon from '~/components/atoms/icon/PostIcon.vue';
 import AppLink from '~/components/atoms/AppLink.vue';
 import useUrls from '~/utils/useUrls';
 import { TabMenuOption } from '~/utils/enum';
@@ -39,7 +37,6 @@ export default defineComponent({
     HomeIcon,
     ReportIcon,
     CalendarIcon,
-    PostIcon,
     AppLink,
   },
   props: {
