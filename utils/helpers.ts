@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { CategoryType, ExpenseType } from '~/utils/enum';
+import { CategoryType, PostType } from '~/utils/enum';
 
 /**
  * selectedOptionをcategory名に変換する処理
@@ -7,9 +7,9 @@ import { CategoryType, ExpenseType } from '~/utils/enum';
 
 export const getCategoryName = (
   selectedOption: number,
-  expenseType: number,
+  postType: number,
 ): string => {
-  if (expenseType === ExpenseType.Expense) {
+  if (postType === PostType.Expense) {
     switch (selectedOption) {
       case 1:
         return '食費';

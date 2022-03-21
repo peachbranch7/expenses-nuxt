@@ -19,7 +19,7 @@ export const tabMenuOptions: TabMenuOptionType[] = [
   },
   {
     label: 'Calendar',
-    link: useUrls.topLink,
+    link: useUrls.calendarLink,
     isActive: 'Calendar',
   },
 ];

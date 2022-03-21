@@ -19,7 +19,7 @@
           name="inputName"
           value="option.category"
           @change="
-            $emit('change', getCategoryName(option.id, expenseType), option.id)
+            $emit('change', getCategoryName(option.id, postType), option.id)
           "
         />
         <img :src="getCategoryImage(option.category)" class="icon" />
@@ -53,7 +53,7 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    expenseType: {
+    postType: {
       type: Number,
       default: 0,
     },

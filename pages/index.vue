@@ -3,12 +3,12 @@
     <AppTabMenu :options="tabMenuOptions" @enter="(v) => (isActive = v)" />
     <ExpenseCard
       v-if="isActive === TabMenuOption.Home"
-      :expense-list-item="expenseArray"
+      :expense-list-item="docs"
     />
     <InputFormContainer
       v-if="isActive === TabMenuOption.Home"
       @click="(v) => (isOpenModal = v)"
-      @change-tab="(v) => (expenseType = v)"
+      @change-tab="(v) => (postType = v)"
     />
     <AppModalContainer
       v-if="isOpenModal"
@@ -25,7 +25,7 @@ import ExpenseCard from '~/components/molecules/ExpenseCard.vue';
 import AppTabMenu from '~/components/molecules/AppTabMenu.vue';
 import { tabMenuOptions } from '~/mixins/TabMenuOptions';
 import { expenseOptions, incomeOptions } from '~/mixins/categoryItems';
-import { ExpenseType, TabMenuOption } from '~/utils/enum';
+import { PostType, TabMenuOption } from '~/utils/enum';
 import { db } from '~/plugins/firebase';
 import InputFormContainer from '~/components/organisms/InputFormContainer.vue';
 import AppModalContainer from '~/components/organisms/AppModalContainer.vue';
@@ -40,38 +40,27 @@ export default defineComponent({
     InputFormContainer,
   },
   setup() {
-    const expenseType = ref<ExpenseType>(ExpenseType.Expense);
+    const postType = ref<PostType>(PostType.Expense);
     const isActive = ref<string>(TabMenuOption.Home);
     const isOpenModal = ref<boolean>(false);
-
-    const expenseArray = ref<FormValuesType[]>([]);
-    const incomeArray = ref<FormValuesType[]>([]);
-    // const incomeRef = collection(db, 'income');
+    const docs = ref<FormValuesType[]>([]);
 
     const currentUserId = authStore.getUserUid;
 
     // TODO: any警察
-    const expenseRef = query(
-      collection(db, 'expense'),
+    const postsRef = query(
+      collection(db, 'posts'),
       where('uid', '==', currentUserId),
     );
 
     // TODO: any警察
     onBeforeMount(() => {
-      onSnapshot(expenseRef, (snapshot) => {
+      onSnapshot(postsRef, (snapshot) => {
         snapshot.docChanges().forEach((change: any) => {
-          return expenseArray.value.push(change.doc.data());
+          return docs.value.push(change.doc.data());
         });
       });
     });
-
-    // onBeforeMount(() => {
-    //   onSnapshot(incomeRef, (snapshot) => {
-    //     snapshot.docChanges().forEach((change) => {
-    //       return incomeArray.value.push(change.doc.data());
-    //     });
-    //   });
-    // });
 
     return {
       useUrls,
@@ -79,12 +68,11 @@ export default defineComponent({
       expenseOptions,
       incomeOptions,
       tabMenuOptions,
-      expenseArray,
-      incomeArray,
+      docs,
       TabMenuOption,
       isOpenModal,
-      expenseType,
-      ExpenseType,
+      postType,
+      PostType,
     };
   },
 });

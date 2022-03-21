@@ -1,6 +1,6 @@
 <template>
   <div class="input-form-container">
-    <BasicExpenseTab @change="(v) => (expenseType = v)" />
+    <BasicExpenseTab @change="(v) => (postType = v)" />
     <ValidationObserver
       ref="observer"
       v-slot="{ invalid }"
@@ -11,7 +11,7 @@
         label="Date"
         :set-value="formValues.date"
         rules="required"
-        :is-income="expenseType === 1"
+        :is-income="postType === 1"
         @input="(v) => (formValues.date = v)"
       />
       <AppInputForm
@@ -19,16 +19,16 @@
         rules="required|number"
         placeholder="¥ 金額を入力してください"
         :set-value="formValues.price"
-        :is-income="expenseType === 1"
+        :is-income="postType === 1"
         input-name="price"
         @input="(v) => (formValues.price = v)"
       />
       <AppRadioButton
         label="Category"
-        :options="expenseType === 0 ? expenseOptions : incomeOptions"
+        :options="postType === 0 ? expenseOptions : incomeOptions"
         :selected-option="selectedOption"
-        :expense-type="expenseType"
-        :is-income="expenseType === 1"
+        :post-type="postType"
+        :is-income="postType === 1"
         class="radiobutton"
         @change="
           (category, selectedOption) => onClick(category, selectedOption)
@@ -38,12 +38,12 @@
         label="Memo"
         placeholder="例）母とディナー"
         :set-value="formValues.memo"
-        :is-income="expenseType === 1"
+        :is-income="postType === 1"
         input-name="memo"
         @input="(v) => (formValues.memo = v)"
       />
       <AppButton
-        :is-income="expenseType === ExpenseType.Income"
+        :is-income="postType === PostType.Income"
         :disabled="invalid"
         @click="confirmFormValues"
         >確認へ</AppButton
@@ -59,7 +59,7 @@ import AppInputForm from '~/components/molecules/AppInputForm.vue';
 import AppButton from '~/components/atoms/AppButton.vue';
 import { FormValuesType } from '~/types/front-type';
 import InputDateForm from '~/components/molecules/InputDateForm.vue';
-import { ExpenseType } from '~/utils/enum';
+import { PostType } from '~/utils/enum';
 import { formValuesStore, authStore } from '@/store';
 import { expenseOptions, incomeOptions } from '~/mixins/categoryItems';
 import BasicExpenseTab from '~/components/atoms/BasicExpenseTab.vue';
@@ -74,9 +74,7 @@ export default defineComponent({
     BasicExpenseTab,
   },
   setup(_, { emit }) {
-    const expenseType = ref<ExpenseType.Expense | ExpenseType.Income>(
-      ExpenseType.Expense,
-    );
+    const postType = ref<PostType.Expense | PostType.Income>(PostType.Expense);
 
     const selectedOption = ref<number>(1);
     const isActiveModal = ref<boolean>(false);
@@ -84,7 +82,7 @@ export default defineComponent({
 
     const getSelectedOption = (id: number): void => {
       if (!selectedOption.value) return;
-      if (expenseType.value === 0) {
+      if (postType.value === 0) {
         selectedOption.value = expenseOptions.find((option) => option.id === id)
           ?.id as number;
       } else {
@@ -95,6 +93,7 @@ export default defineComponent({
 
     const formValues = ref<FormValuesType>({
       uid: currentUserId,
+      postType: 0,
       date: '',
       price: '',
       memo: '',
@@ -112,12 +111,12 @@ export default defineComponent({
     };
 
     return {
-      expenseType,
+      postType,
       expenseOptions,
       incomeOptions,
       getSelectedOption,
       selectedOption,
-      ExpenseType,
+      PostType,
       confirmFormValues,
       formValues,
       onClick,

@@ -13,13 +13,18 @@
         <ReportIcon v-if="option.label === 'Report'" class="icon" />
         <CalendarIcon v-if="option.label === 'Calendar'" class="icon" />
         <PostIcon v-if="option.label === 'Post'" class="icon" />
-        <AppLink class="link">{{ option.label }}</AppLink>
+        <AppLink :to="option.link" class="link">{{ option.label }}</AppLink>
       </li>
     </ul>
   </section>
 </template>
 <script lang="ts">
-import { defineComponent, ref, PropType } from '@nuxtjs/composition-api';
+import {
+  defineComponent,
+  ref,
+  PropType,
+  useRouter,
+} from '@nuxtjs/composition-api';
 import HomeIcon from '~/components/atoms/icon/HomeIcon.vue';
 import ReportIcon from '~/components/atoms/icon/ReportIcon.vue';
 import CalendarIcon from '~/components/atoms/icon/CalendarIcon.vue';
@@ -45,26 +50,22 @@ export default defineComponent({
   },
   setup(_, { emit }) {
     const isActive = ref<string>(TabMenuOption.Home);
+    const router = useRouter();
+
+    const link = () => {
+      router.push('/calendar');
+    };
 
     const getTabMenuOption = (option: string) => {
       isActive.value = option;
       emit('enter', isActive.value);
     };
 
-    const getActiveLabel = (label: string) => {
-      return {
-        HomeIcon: label === 'Home',
-        PostIcon: label === 'Post',
-        ReportIcon: label === 'Report',
-        CalendarIcon: label === 'Calendar',
-      };
-    };
-
     return {
       useUrls,
       isActive,
-      getActiveLabel,
       getTabMenuOption,
+      link,
     };
   },
 });
