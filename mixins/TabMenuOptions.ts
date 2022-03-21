@@ -8,11 +8,6 @@ export const tabMenuOptions: TabMenuOptionType[] = [
     isActive: 'Home',
   },
   {
-    label: 'Post',
-    link: useUrls.topLink,
-    isActive: 'Post',
-  },
-  {
     label: 'Report',
     link: useUrls.topLink,
     isActive: 'Report',
