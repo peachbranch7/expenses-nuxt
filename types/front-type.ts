@@ -20,6 +20,10 @@ export type FormValuesType = {
   memo: string;
 };
 
+export type PostDoc = Omit<FormValuesType, 'date'> & {
+  date: { seconds: number; nanoseconds: number };
+};
+
 export type TabMenuOptionType = {
   label: string;
   link: string;
