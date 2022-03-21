@@ -2,7 +2,7 @@
   <header class="header-container">
     <div class="container">
       <AppLink :to="useUrls.topLink" class="title">Expenses</AppLink>
-      <div class="humburger">aaaa</div>
+      <div class="hamburger">aaaa</div>
     </div>
   </header>
 </template>
