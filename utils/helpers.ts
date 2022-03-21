@@ -95,3 +95,7 @@ export const convertTimeZornFormat = (date: Date) => {
 export const convertDateFormat = (date: Dayjs): string => {
   return dayjs(date.toDate()).format(`YYYY年M月DD日`);
 };
+
+export const convertDateFormatWithHyphen = (date: number): string => {
+  return dayjs.unix(date).format(`YYYY-MM-DD`);
+};

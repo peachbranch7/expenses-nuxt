@@ -1,5 +1,5 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
-import { FormValuesType } from '~/types/front-type';
+import { FormValuesType, PostDoc } from '~/types/front-type';
 
 @Module({
   name: 'formValues',
@@ -16,13 +16,24 @@ export default class FormValues extends VuexModule {
     memo: '',
   };
 
+  private PostDoc: PostDoc[] = [];
+
   get getFormValues() {
     return this.formValues;
+  }
+
+  get getPostDoc() {
+    return this.PostDoc;
   }
 
   @Mutation
   private setFormValues(data: FormValuesType) {
     return (this.formValues = data);
+  }
+
+  @Mutation
+  private setPostDoc(docs: PostDoc[]) {
+    this.PostDoc = [...docs];
   }
 
   @Mutation
@@ -43,5 +54,10 @@ export default class FormValues extends VuexModule {
   @Action
   public dispatchInitFormValues() {
     return this.initFormValues();
+  }
+
+  @Action
+  public addPostCollectionData(docs: PostDoc[]) {
+    return this.setPostDoc(docs);
   }
 }
