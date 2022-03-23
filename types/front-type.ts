@@ -20,7 +20,7 @@ export type FormValuesType = {
   memo: string;
 };
 
-export type PostDoc = Omit<FormValuesType, 'date'> & {
+export type PostCollectionData = Omit<FormValuesType, 'date'> & {
   date: { seconds: number; nanoseconds: number };
 };
 

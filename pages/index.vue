@@ -30,7 +30,7 @@ import { db } from '~/plugins/firebase';
 import InputFormContainer from '~/components/organisms/InputFormContainer.vue';
 import AppModalContainer from '~/components/organisms/AppModalContainer.vue';
 import { authStore, formValuesStore } from '@/store';
-import { PostDoc } from '~/types/front-type';
+import { PostCollectionData } from '~/types/front-type';
 
 export default defineComponent({
   components: {
@@ -43,7 +43,7 @@ export default defineComponent({
     const postType = ref<PostType>(PostType.Expense);
     const isActive = ref<string>(TabMenuOption.Home);
     const isOpenModal = ref<boolean>(false);
-    const docs = ref<PostDoc[]>([]);
+    const docs = ref<PostCollectionData[]>([]);
 
     const currentUserId = authStore.getUserUid;
 
